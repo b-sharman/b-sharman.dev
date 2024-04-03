@@ -32,7 +32,7 @@ export const load: PageLoad = async (p) => {
   retval.html = marked(text);
 
   retval.url = p.url.toString();
-  retval.firstImage = (new URL(firstImage, retval.url)).toString();
+  retval.firstImage = (new URL(`images/${retval["slug"]}/${firstImage}`, p.url)).toString();
 
   return retval;
 };
