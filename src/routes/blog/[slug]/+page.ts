@@ -4,6 +4,7 @@ import { marked } from 'marked';
 
 export const load: PageLoad = async (p) => {
   let firstImage: string = "";
+  let firstImageAlt: string = "";
 
   const renderer = {
     // this is just the defualt renderer
@@ -11,7 +12,10 @@ export const load: PageLoad = async (p) => {
     // but modified to wrap everything in a <figure> and use titles as captions
     image(href: string, title: string | null, text: string): string {
       if (href === "") return text;
-      if (firstImage === "") firstImage = href;
+      if (firstImage === "") {
+        firstImage = href;
+        firstImageAlt = text;
+      }
       let out = `<figure class="flex flex-col text-center"><img src="/blog/images/${p.params.slug}/${href}" alt="${text}" class="mx-auto" />`;
       if (title) {
         out += `<figcaption>${title}</figcaption>`;
@@ -33,6 +37,7 @@ export const load: PageLoad = async (p) => {
 
   retval.url = p.url.toString();
   retval.firstImage = (new URL(`images/${retval["slug"]}/${firstImage}`, p.url)).toString();
+  retval.firstImageAlt = firstImageAlt;
 
   return retval;
 };
