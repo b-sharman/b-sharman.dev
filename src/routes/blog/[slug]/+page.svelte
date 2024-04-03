@@ -7,8 +7,13 @@
 </script>
 
 <svelte:head>
-  <meta name="description" content={data.preview} />
   <title>{`${data.title} - Byron Sharman's blog`}</title>
+  <meta name="description" content={data.preview} />
+
+  <meta property="og:title" content={data.title} />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={data.url} />
+  <meta property="og:image" content={data.firstImage} />
 </svelte:head>
 
 <div class="flex justify-center p-4">
