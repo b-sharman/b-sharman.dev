@@ -10,7 +10,7 @@ Addison wrote code to make wobjects draggable and resizable. Wobjects needed to 
 
 This is a good time to take a break to discuss the role of caffeine in hackathons. Caffeine and hackathons are made for each other. Caffeine is part of the hackathon experience. I was happy to see that the HackCU organizers blessed us with free Red Bull and Celsius, and I'd also brought my stash of Monsters from my dorm. There's something magical about drinking something sugary and feeling tiredness morph into determination. It's like [typing `import antigravity` and feeling yourself fly](https://xkcd.com/353/)! After just a few sips, I was ready to get back into action.
 
-![I code on my laptop behind a row of 3 Monsters and a Red Bull.](caffeine.webp "Fuel for the journey. Image credit: Andy Strong on LinkedIn.")
+![I code on my laptop behind a row of 3 Monsters and a Red Bull.](caffeine.jpg "Fuel for the journey. Image credit: Andy Strong on LinkedIn.")
 
 Ryan noticed a problem with the wobject creation menu: new wobjects wouldn't appear until the page was reloaded. This appeared to be related to how the fetch API was sending requests to the backend. We tried adding React Query to standardize fetch behavior and spent a long time trying different fixes without avail.
 
