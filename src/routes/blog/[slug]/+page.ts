@@ -35,8 +35,11 @@ export const load: PageLoad = async (p) => {
     .then(res => res.text());
   retval.html = marked(text);
 
-  retval.url = p.url.toString();
-  retval.firstImage = (new URL(`images/${retval["slug"]}/${firstImage}`, p.url)).toString();
+  // ended up hardcoding because I didn't want to have to set up env variables or something else nasty
+  // (p.url doesn't work with prerendering; it only resolves after javascript is called, which most sites don't like)
+  // retval.url = p.url.toString();
+  retval.url = `https://b-sharman.dev/blog/${retval["slug"]}/`;
+  retval.firstImage = `https://b-sharman.dev/blog/images/${retval["slug"]}/${firstImage}`;
   retval.firstImageAlt = firstImageAlt;
 
   return retval;
