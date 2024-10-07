@@ -5,8 +5,8 @@
 </script>
 
 <li in:slide={{duration: 150}} out:slide={{duration: 275}} class="group overflow-hidden border hover:border-gray-400 rounded-xl min-w-[250px]">
-  <a href={project.url} class="block rounded-xl">
-    <div class="p-4">
+  <a href={project.url} class="flex flex-col size-full block rounded-xl">
+    <div class="grow flex flex-col p-4">
       <h3 class="font-bold text-xl mb-2">
         {project.name}
         {#if project.hackathonName !== undefined}
@@ -14,7 +14,7 @@
         {/if}
       </h3>
       <p class="text-sm text-gray-600 mb-4">{project.category}</p>
-      <p>{project.description}</p>
+      <p class="grow">{project.description}</p>
       <p class="mt-2 text-sm text-gray-600">{project.languages.join(', ')}</p>
     </div>
     <footer class="flex justify-end items-center bg-gray-200">
