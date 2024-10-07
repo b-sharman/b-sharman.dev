@@ -41,14 +41,14 @@
 
     <section class="my-6 sm:my-16">
       <h2 class="my-8 font-bold text-3xl lg:text-4xl">Projects</h2>
-      <ul class="grid grid-flow-row grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-4">
+      <ul class="grid grid-flow-row grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4">
         {#each data.projects.slice(0, projectCount) as project}
           <ProjectCard project={project} />
         {/each}
       </ul>
       <button
         on:click={() => {projectsExpanded = !projectsExpanded;}}
-        class="w-full items-center flex flex-row gap-4 lg:gap-6 text-gray-600 before:relative before:block before:flex-1 before:w-full before:h-px before:bg-gray-300 after:relative after:block after:flex-1 after:w-full after:h-px after:bg-gray-300 hover:underline"
+        class="mt-4 w-full items-center flex flex-row gap-4 lg:gap-6 text-gray-600 before:relative before:block before:flex-1 before:w-full before:h-px before:bg-gray-300 after:relative after:block after:flex-1 after:w-full after:h-px after:bg-gray-300 hover:underline"
       >
         {expandButtonText}
       </button>
