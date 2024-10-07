@@ -43,7 +43,7 @@
 
     <div class="flex flex-col items-center">
       <header class="my-6 max-w-prose">
-        <img alt="portrait of my face with blurred plants in the background" src="portrait.png" class="m-auto p-8 size-3/4 max-w-[320px] rounded-full" />
+        <img alt="portrait of my face with blurred plants in the background" src="portrait.avif" class="m-auto p-8 size-3/4 max-w-[320px] rounded-full" />
         <h1 class="font-bold text-4xl lg:text-5xl text-center">Byron Sharman</h1>
         <ul class="my-4 flex flex-row justify-center divide-x">
             <li class="px-4"><Email /></li>
