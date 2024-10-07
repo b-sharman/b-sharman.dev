@@ -22,7 +22,7 @@
   <main class="size-full max-w-[1240px]">
 
     <div class="flex flex-col items-center">
-      <header class="my-6 sm:mb-12 max-w-prose">
+      <header class="my-6 max-w-prose">
         <img alt="portrait of my face with blurred plants in the background" src="portrait.png" class="m-auto p-8 size-3/4 max-w-[320px] rounded-full" />
         <h1 class="font-bold text-4xl lg:text-5xl text-center">Byron Sharman</h1>
         <ul class="my-4 flex flex-row justify-center divide-x">
@@ -32,8 +32,8 @@
         </ul>
       </header>
 
-      <article class="my-6 prose lg:prose-xl">
-        <p>
+      <article class="my-6 prose md:prose-lg lg:prose-xl">
+        <p class="text-pretty">
           I'm Byron, a computer science student at Colorado School of Mines. I love to go to hackathons, learn tools and technologies, and explore the world, both physically and conceptually.
         </p>
       </article>
@@ -41,7 +41,7 @@
 
     <section class="my-6 sm:my-16">
       <h2 class="my-8 font-bold text-3xl lg:text-4xl">Projects</h2>
-      <ul class="grid grid-flow-row grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4">
+      <ul class="grid grid-flow-row grid-cols-1 sm:grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4">
         {#each data.projects.slice(0, projectCount) as project}
           <ProjectCard project={project} />
         {/each}
