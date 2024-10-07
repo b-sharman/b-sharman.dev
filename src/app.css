@@ -28,3 +28,9 @@
         @apply mb-0 w-max object-scale-down sm:max-h-96 md:max-h-[34rem];
     }
 }
+
+@layer components {
+  .heading2 {
+    @apply my-8 font-bold text-3xl lg:text-4xl;
+  }
+}
