@@ -6,20 +6,13 @@
 
   export let data: PageData;
 
-  let projectGrid: HTMLElement;
-
   // whether the projects list is expanded to show all projects
   let projectsExpanded = false;
 
   const defaultNumProjects = 3;
 
+  $: projectCount = projectsExpanded ? data.projects.length : defaultNumProjects;
   $: expandButtonText = projectsExpanded ? "collapse" : `show all (${data.projects.length - defaultNumProjects} more)`;
-
-  function toggleProjectGrid() {
-    projectsExpanded = !projectsExpanded;
-    projectGrid.style.gridTemplateRows = projectsExpanded ? "repeat(1fr, 100)" : "1fr";
-    projectGrid.style.gridAutoRows = projectsExpanded ? "auto" : "0";
-  }
 </script>
 
 <svelte:head>
@@ -50,14 +43,14 @@
 
     <section class="my-6 sm:my-16">
       <h2 class="my-8 font-bold text-3xl lg:text-4xl">Projects</h2>
-      <ul bind:this={projectGrid} class="grid grid-flow-row grid-cols-1 grid-rows-[1fr] auto-rows-[0] sm:grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4 gap-y-0 overflow-hidden">
-        {#each data.projects.slice(0, data.projects.length) as project}
+      <ul class="grid grid-flow-row grid-cols-1 sm:grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4">
+        {#each data.projects.slice(0, projectCount) as project}
           <ProjectCard project={project} />
         {/each}
       </ul>
       <button
-        on:click={toggleProjectGrid}
-        class="w-full items-center flex flex-row gap-4 lg:gap-6 text-gray-600 before:relative before:block before:flex-1 before:w-full before:h-px before:bg-gray-300 after:relative after:block after:flex-1 after:w-full after:h-px after:bg-gray-300 hover:underline"
+        on:click={() => {projectsExpanded = !projectsExpanded;}}
+        class="mt-4 w-full items-center flex flex-row gap-4 lg:gap-6 text-gray-600 before:relative before:block before:flex-1 before:w-full before:h-px before:bg-gray-300 after:relative after:block after:flex-1 after:w-full after:h-px after:bg-gray-300 hover:underline"
       >
         {expandButtonText}
       </button>
