@@ -1,5 +1,6 @@
 <script lang='ts'>
   import type { PageData } from './$types';
+  import { onMount } from 'svelte';
   import Email from '$lib/email.svelte';
   import BlogCard from '$lib/blog_card.svelte';
   import ProjectCard from '$lib/project_card.svelte';
@@ -9,11 +10,28 @@
   // whether the projects list is expanded to show all projects
   let projectsExpanded = false;
 
-  const defaultNumProjects = 3;
+  let projectGrid: HTMLElement;
 
-  $: projectCount = projectsExpanded ? data.projects.length : defaultNumProjects;
-  $: expandButtonText = projectsExpanded ? "collapse" : `show all (${data.projects.length - defaultNumProjects} more)`;
+  const defaultNumProjects = 3;
+  let numProjects = defaultNumProjects;
+  const calcNumProjects = () => {
+    const numCols = window
+      .getComputedStyle(projectGrid)
+      .getPropertyValue("grid-template-columns")
+      .split(" ")
+      .length;
+    if (numCols == 2) numProjects = 2;
+    else if (numCols > defaultNumProjects) numProjects = numCols;
+    else numProjects = defaultNumProjects;
+  };
+
+  onMount(calcNumProjects);
+
+  $: projectCount = projectsExpanded ? data.projects.length : numProjects;
+  $: expandButtonText = projectsExpanded ? "collapse" : `show all (${data.projects.length - numProjects} more)`;
 </script>
+
+<svelte:window on:resize={calcNumProjects} />
 
 <svelte:head>
   <title>Byron Sharman</title>
@@ -43,7 +61,7 @@
 
     <section class="my-6 sm:my-16">
       <h2 class="my-8 font-bold text-3xl lg:text-4xl">Projects</h2>
-      <ul class="grid grid-flow-row grid-cols-1 sm:grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4">
+      <ul bind:this={projectGrid} class="grid grid-flow-row grid-cols-1 sm:grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4">
         {#each data.projects.slice(0, projectCount) as project}
           <ProjectCard project={project} />
         {/each}
