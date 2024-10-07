@@ -5,7 +5,7 @@
 </script>
 
 <li in:slide={{duration: 150}} out:slide={{duration: 275}} class="group overflow-hidden border hover:border-gray-400 rounded-xl sm:min-w-[250px]">
-  <a href={project.url} class="flex flex-col size-full block rounded-xl">
+  <a href={project.url} class="flex flex-col size-full rounded-xl">
     <div class="grow flex flex-col p-4">
       <h3 class="font-bold text-xl mb-2">
         {project.name}
