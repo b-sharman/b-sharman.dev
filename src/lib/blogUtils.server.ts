@@ -10,3 +10,8 @@ export function blogJsonToObject(obj: Object, shouldSlice: boolean = false) {
     }
   ) as Blog[];
 }
+
+export async function getBlogsAsJson(fetchFunc: Function) {
+  return await fetchFunc('/blog/build/index.json')
+    .then((res: Response) => res.json());
+}

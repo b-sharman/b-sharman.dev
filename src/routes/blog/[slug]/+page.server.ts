@@ -3,11 +3,10 @@ import type { PageLoad } from './$types';
 import { marked } from 'marked';
 import hljs from 'highlight.js/lib/common';
 
-import { blogJsonToObject } from '$lib/blogJsonToObject.server';
+import { blogJsonToObject, getBlogsAsJson } from '$lib/blogUtils.server';
 
 export const load: PageLoad = async (p) => {
-  const blogs = await p.fetch('/blog/build/index.json')
-    .then((res: Response) => res.json());
+  const blogs = await getBlogsAsJson(p.fetch);
 
   // return 404 if the data has no slug
   if (!Object.keys(blogs).includes(p.params.slug)) return error(404, 'Not found');
