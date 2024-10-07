@@ -2,7 +2,8 @@ import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { marked } from 'marked';
 import hljs from 'highlight.js/lib/common';
-import type { Blog } from '$lib/types';
+
+import { blogJsonToObject } from '$lib/blogJsonToObject.server';
 
 export const load: PageLoad = async (p) => {
   const blogs = await p.fetch('/blog/build/index.json')
@@ -72,13 +73,6 @@ export const load: PageLoad = async (p) => {
     }]
   });
 
-  retval.blogs = Object.entries(blogs)
-    .slice(1, 5)
-    .map(
-      ([key, value]: [string, any]) => {
-        return {...value, slug: key};
-      }
-    ) as Blog[];
-
+  retval.blogs = blogJsonToObject(blogs, true);
   return retval;
 };
