@@ -19,26 +19,29 @@
 </svelte:head>
 
 <div class="flex justify-center p-4">
-  <main class="max-w-prose">
-    <header class="my-6 sm:mb-12">
-      <img alt="portrait of my face with blurred plants in the background" src="portrait.png" class="m-auto p-8 size-3/4 sm:size-1/2 max-w-[320px] rounded-full" />
-      <h1 class="font-bold text-4xl lg:text-5xl text-center">Byron Sharman</h1>
-      <ul class="my-4 flex flex-row justify-center divide-x">
-          <li class="px-4"><Email /></li>
-          <li class="px-4"><a href="https://github.com/b-sharman">GitHub</a></li>
-          <li class="px-4"><a href="https://www.linkedin.com/in/b-sharman/">LinkedIn</a></li>
-      </ul>
-    </header>
+  <main class="size-full max-w-[1240px]">
 
-    <article class="my-6 prose lg:prose-xl">
-      <p>
-        I'm Byron, a computer science student at Colorado School of Mines. I love to go to hackathons, learn tools and technologies, and explore the world, both physically and conceptually.
-      </p>
-    </article>
+    <div class="flex flex-col items-center">
+      <header class="my-6 sm:mb-12 max-w-prose">
+        <img alt="portrait of my face with blurred plants in the background" src="portrait.png" class="m-auto p-8 size-3/4 max-w-[320px] rounded-full" />
+        <h1 class="font-bold text-4xl lg:text-5xl text-center">Byron Sharman</h1>
+        <ul class="my-4 flex flex-row justify-center divide-x">
+            <li class="px-4"><Email /></li>
+            <li class="px-4"><a href="https://github.com/b-sharman">GitHub</a></li>
+            <li class="px-4"><a href="https://www.linkedin.com/in/b-sharman/">LinkedIn</a></li>
+        </ul>
+      </header>
+
+      <article class="my-6 prose lg:prose-xl">
+        <p>
+          I'm Byron, a computer science student at Colorado School of Mines. I love to go to hackathons, learn tools and technologies, and explore the world, both physically and conceptually.
+        </p>
+      </article>
+    </div>
 
     <section class="my-6 sm:my-16">
       <h2 class="my-8 font-bold text-3xl lg:text-4xl">Projects</h2>
-      <ul>
+      <ul class="grid grid-flow-row grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-4">
         {#each data.projects.slice(0, projectCount) as project}
           <ProjectCard project={project} />
         {/each}
