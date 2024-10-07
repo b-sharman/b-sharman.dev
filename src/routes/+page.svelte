@@ -9,8 +9,10 @@
   // whether the projects list is expanded to show all projects
   let projectsExpanded = false;
 
-  $: projectCount = projectsExpanded ? data.projects.length : 3;
-  $: expandButtonText = projectsExpanded ? "collapse" : `show all (${data.projects.length - 3} more)`;
+  const defaultNumProjects = 3;
+
+  $: projectCount = projectsExpanded ? data.projects.length : defaultNumProjects;
+  $: expandButtonText = projectsExpanded ? "collapse" : `show all (${data.projects.length - defaultNumProjects} more)`;
 </script>
 
 <svelte:head>
