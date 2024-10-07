@@ -29,7 +29,7 @@
   <main class="min-w-0">
     <article class="my-6 prose text-[17px]">
       <header class="mb-8 lg:mb-12">
-        <h1>{data.title}</h1>
+        <h1 class="text-pretty">{data.title}</h1>
         <DateP unixtime={data.date} />
         {#if data.customHeaderHTML}
           {@html data.customHeaderHTML}
