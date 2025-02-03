@@ -1,5 +1,4 @@
 <script lang='ts'>
-  import { onMount } from 'svelte';
   import type { PageData } from './$types';
   import Email from '$lib/email.svelte';
   import BlogCard from '$lib/blogCard.svelte';
@@ -13,10 +12,6 @@
 
   // whether the projects list is expanded to show all projects
   let projectsExpanded = $state(false);
-
-  onMount(() => {
-    console.log(`Hello, world! The base URL is ${import.meta.env.VITE_URL}`);
-  });
 
   const numProjects = 2;
 
