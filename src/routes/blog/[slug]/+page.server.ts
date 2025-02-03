@@ -53,11 +53,10 @@ export const load: PageLoad = async (p) => {
     .catch((err: Error) => console.error(err));
   retval.html = marked(text);
 
-  // TODO: use environment variables or something other than hardcoding the domain
-  retval.url = `https://b-sharman.dev/blog/${p.params.slug}/`;
+  retval.url = `${import.meta.env.VITE_URL}/blog/${p.params.slug}/`;
   if (retval.previewImage !== undefined) {
-    retval.previewImageUrl = `https://b-sharman.dev/blog/images/${p.params.slug}/${retval.previewImage}.${retval.previewImageExt}`;
-    retval.openGraphImageUrl = `https://b-sharman.dev/blog/images/${p.params.slug}/${retval.previewImage}.${retval.openGraphImageExt}`;
+    retval.previewImageUrl = `${import.meta.env.VITE_URL}/blog/images/${p.params.slug}/${retval.previewImage}.${retval.previewImageExt}`;
+    retval.openGraphImageUrl = `${import.meta.env.VITE_URL}/blog/images/${p.params.slug}/${retval.previewImage}.${retval.openGraphImageExt}`;
   }
 
   retval.ldjson = JSON.stringify({
