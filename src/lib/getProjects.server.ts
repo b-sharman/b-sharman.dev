@@ -36,9 +36,7 @@ async function createGithubProject(
 
     // set project.languages by querying the URL returned by the API
     const lang_res = await fetchFunc(githubProject.languages_url);
-    const lang_json = await lang_res.json();
-    console.log(lang_json);
-    project.languages = Object.keys(lang_json)
+    project.languages = Object.keys(await lang_res.json())
       .filter(lang => !LANG_EXCLUDES.includes(lang));
 
     project.bottomText = "see it on GitHub";
