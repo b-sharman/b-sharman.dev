@@ -4,6 +4,11 @@ import { ProjectType } from "$lib/types";
 import imageSizeFromFile from "image-size";
 import { marked } from "marked";
 
+const LANG_EXCLUDES = [
+    "Dockerfile",
+    "Makefile",
+];
+
 async function getDescription(
   projectName: string,
   fetchFunc: typeof fetch,
@@ -31,7 +36,10 @@ async function createGithubProject(
 
     // set project.languages by querying the URL returned by the API
     const lang_res = await fetchFunc(githubProject.languages_url);
-    project.languages = Object.keys(await lang_res.json());
+    const lang_json = await lang_res.json();
+    console.log(lang_json);
+    project.languages = Object.keys(lang_json)
+      .filter(lang => !LANG_EXCLUDES.includes(lang));
 
     project.bottomText = "see it on GitHub";
     project.description = githubProject.description;
