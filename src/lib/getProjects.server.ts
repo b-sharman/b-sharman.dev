@@ -28,6 +28,7 @@ async function createGithubProject(
   project: Project,
   fetchFunc: typeof fetch,
 ): Promise<Project> {
+  // TODO: properly inspect the response instead of blindly catching all exceptions
   try {
     const res: Response = await fetchFunc(
       `https://api.github.com/repos/b-sharman/${projectName}`,
@@ -40,6 +41,9 @@ async function createGithubProject(
     // when we are rate limited, the response includes a "message" field
     if ("message" in lang_json) {
       project.languages = [];
+      console.log(
+        `skipping languages for project ${githubProject.name} because of Github API rate limiting`,
+      );
     } else {
       project.languages = Object.keys(lang_json)
         .filter(lang => !LANG_EXCLUDES.includes(lang));
