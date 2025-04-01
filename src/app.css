@@ -26,7 +26,7 @@
     @apply font-bold;
   }
   .prose figcaption {
-    @apply mt-4!;
+    @apply mt-4! text-gray-700!;
   }
   .prose figcaption p {
     @apply my-0!;
