@@ -1,4 +1,15 @@
 {
+  "pear": {
+    "type": "github",
+    "category": "hackathon",
+    "hackathonName": "Blasterhacks 2025",
+    "image": {
+      "path": "/projects/images/pear.avif",
+      "alt": "a screenshot of two terminals synchronized with Pear"
+    },
+    "languages": ["Go", "Svelte"],
+    "name": "Pear"
+  },
   "b-sharman.dev": {
     "type": "github",
     "category": "personal"
