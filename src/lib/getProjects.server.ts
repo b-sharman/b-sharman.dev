@@ -4,10 +4,7 @@ import { ProjectType } from "$lib/types";
 import imageSizeFromFile from "image-size";
 import { marked } from "marked";
 
-const LANG_EXCLUDES = [
-    "Dockerfile",
-    "Makefile",
-];
+const LANG_EXCLUDES = ["Dockerfile", "Makefile"];
 
 async function getDescription(
   projectName: string,
@@ -45,8 +42,9 @@ async function createGithubProject(
         `skipping languages for project ${githubProject.name} because of Github API rate limiting`,
       );
     } else {
-      project.languages = Object.keys(lang_json)
-        .filter(lang => !LANG_EXCLUDES.includes(lang));
+      project.languages = Object.keys(lang_json).filter(
+        (lang) => !LANG_EXCLUDES.includes(lang),
+      );
     }
 
     project.bottomText = "see it on GitHub";
