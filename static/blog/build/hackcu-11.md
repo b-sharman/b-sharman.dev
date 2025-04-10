@@ -1,25 +1,27 @@
-Another year, another hackathon season! This time, I'm here to tell you about
-the 11th iteration of HackCU, CU&nbsp;Boulder's flagship hackathon, which I
-attended with teammates [Megan](https://github.com/megankulshekar) and
-[Renn](https://github.com/kylo33). Leaving the Mines campus Friday morning with
-plenty of time to spare, we spent some time brainstorming ideas and decided to
-do something with the [Congress.gov&nbsp;API](https://api.congress.gov/). We
-knew we wanted to make Congressional data more accessible than Congress's
-website does, but otherwise, our goal wasn't very clearly defined by the time
-we started coding.
+Another year, another hackathon season! This time, I'm writing to narrate the
+11th iteration of HackCU, CU&nbsp;Boulder's hackathon, which I attended with
+[Megan](https://github.com/megankulshekar) and
+[Renn](https://github.com/kylo33).
+
+Leaving the Mines campus Friday morning with plenty of time to spare, we spent
+some time brainstorming ideas and decided to do something with the
+[Congress.gov&nbsp;API](https://api.congress.gov/). We wanted to make a
+visualization for the data and provide an interface similar to Congress's
+official website but with some simplifications to decrease its technical
+barrier.
 
 Search seemed like the best way to make the information accessible, so I set up
 a simple fuzzy search with [Fuse.js](https://www.fusejs.io/). This worked fine
-for members of Congress, but for bills, a much larger dataset, it wasn't fast
-enough to perform a search on every keypress.
+for searching members of Congress, but for searching bills, a much larger
+dataset, it wasn't fast enough to execute every keypress.
 
-In the spirit of a true data collector, Renn decided to download all available
-bills so that our search and visualization functionalities wouldn't have to
-make expensive network calls at runtime. This wasn't easy because bills were
-only available as XML files with inconsistent formatting and fields, and they
-were also paginated, so only a few could be downloaded at a time. Eventually,
-however, he wrote a Bash script that inserted all 156,669 bills into a SQLite
-database, allowing us to implement an exact-match search very easily with the
+Renn decided to download all available bills so that our search and
+visualization functionalities could work locally on the server side. This
+wasn't easy because bills were only available as XML files with inconsistent
+formatting and fields, and they were also paginated, so only a few could be
+downloaded at a time. Eventually, however, he wrote a Bash script that inserted
+all 156,669 bills into a SQLite database, allowing us to implement an
+exact-match search very easily with the
 [`LIKE`](https://www.sqlite.org/optoverview.html#like_opt) SQL keyword. This
 was quite performant.
 
