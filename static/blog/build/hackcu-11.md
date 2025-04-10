@@ -1,27 +1,27 @@
 Another year, another hackathon season! This time, I'm here to tell you about
 the 11th iteration of HackCU, CU&nbsp;Boulder's flagship hackathon, which I
-attended with teammates [Megan Kulshekar](https://github.com/megankulshekar)
-and [Renn Gilbert](https://github.com/kylo33). Leaving the Mines campus Friday
-morning with plenty of time to spare, we spent some time brainstorming ideas
-and decided to do something with the
-[Congress.gov&nbsp;API](https://api.congress.gov/). We knew we wanted to make
-Congressional data more accessible than Congress's website does, but otherwise,
-our goal wasn't very clearly defined by the time we started coding.
+attended with teammates [Megan](https://github.com/megankulshekar) and
+[Renn](https://github.com/kylo33). Leaving the Mines campus Friday morning with
+plenty of time to spare, we spent some time brainstorming ideas and decided to
+do something with the [Congress.gov&nbsp;API](https://api.congress.gov/). We
+knew we wanted to make Congressional data more accessible than Congress's
+website does, but otherwise, our goal wasn't very clearly defined by the time
+we started coding.
 
-In the beginning, I toyed around with different things one might do with the
-data, like searching through members of Congress. There are plenty of fuzzy
-search JavaScript libraries on npm, but after deciding to search bills instead
-of members, I realized that this would not be fast enough to update on every
-keypress.
+Search seemed like the best way to make the information accessible, so I set up
+a simple fuzzy search with [Fuse.js](https://www.fusejs.io/). This worked fine
+for members of Congress, but for bills, a much larger dataset, it wasn't fast
+enough to perform a search on every keypress.
 
 In the spirit of a true data collector, Renn decided to download all available
-bills so we could build a local search index. This wasn't easy because bills
-were only available as XML files with inconsistent formatting and fields, and
-they were also paginated, so only a few could be downloaded at a time.
-Eventually, however, he wrote a Bash script that inserted all 156,669 bills
-into a SQLite database, allowing us to implement a crude search very easily
-with the [`LIKE`](https://www.sqlite.org/optoverview.html#like_opt) SQL
-keyword. This was quite performant.
+bills so that our search and visualization functionalities wouldn't have to
+make expensive network calls at runtime. This wasn't easy because bills were
+only available as XML files with inconsistent formatting and fields, and they
+were also paginated, so only a few could be downloaded at a time. Eventually,
+however, he wrote a Bash script that inserted all 156,669 bills into a SQLite
+database, allowing us to implement an exact-match search very easily with the
+[`LIKE`](https://www.sqlite.org/optoverview.html#like_opt) SQL keyword. This
+was quite performant.
 
 Meanwhile, Megan, who'd recently covered machine learning in some of her
 classes, wanted to apply this knowledge to our app, creating a model that
@@ -37,21 +37,22 @@ the titles matching the search text, and more.
 
 Lots of these tasks came with small sub-problems. For example, since summaries
 were not part of the locally available data, each bill incurred a network call
-to fetch its summary—and the bills changed every time a key was pressed. We
-solved this issue by making each result an expandable card that didn't load the
-summary until the user clicked on it. This was a good place to incorporate
-animation, which was delightfully easy with Svelte's
-[`transition:`](https://svelte.dev/docs/svelte/transition).
+to fetch its summary—and the bills changed every time a key was pressed. This
+made searching feel unresponsive. We solved this issue by making each result an
+expandable card that didn't load the summary until the user clicked on it. This
+was a good place to incorporate animation, which was delightfully easy thanks
+to Svelte's [`transition:`](https://svelte.dev/docs/svelte/transition).
 
-Highlighting matches was another problem. At first, I accomplished this by
-wrapping matches in `<span>` elements with a yellow background color. Since I
-wanted search to be case-insensitive, I converted everything to lowercase
-before finding substrings, but this made all highlighted text become lowercase,
-which looked really bad. Eventually, I discovered that when the second argument
-of
-[`String.prototype.replace()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-is a function instead of a string, that function can receive the matched
-pattern (with case preserved) as an argument.
+Highlighting matches presented another problem. At first, I wrapped every
+occurrence of the search text in a `<span>` element with a yellow background
+color using
+[`String.prototype.replaceAll()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll).
+Since I wanted search to be case-insensitive, I converted the titles to
+lowercase before comparison, but this made all highlighted text become
+lowercase, which looked awkward. After perusing the documentation awhile, I
+learned that `replaceAll`'s replacement argument doesn't have to be a string.
+It can be a function that receives the matched pattern (with case preserved) as
+an argument and returns the desired `<span>...</span>` string.
 
 Renn finished a [sankey plot](https://en.wikipedia.org/wiki/Sankey_diagram) of
 the bills that showed them moving through the various stages of Congress. There
@@ -92,7 +93,7 @@ attribute. Turns out the Tailwind syntax for this is
 <small> (No, I did not use AI to figure this out. I read the documentation!
     (Whoa!) Which is a very good thing, since AI has been trained on the
     previous version of Tailwind, which has several incompatibilities with the
-    new v4.) </small>
+    recently released v4.) </small>
 
 As we got closer to wrapping up, most of my commits were minor things like
 [`text-wrap:
@@ -105,11 +106,11 @@ long run if I had.
 
 I really enjoyed working with my teammates. Megan's ML model was an extremely
 cool feature that added a lot of value to the project because besides the
-visualization, it is the only functionality that isn't implemented by
-Congress's website. Even though it was his first hackathon, Renn did a lot of
-the heavy lifting, writing most of the backend as well as designing our
-architecture and processing a big dataset. Overall, the hackathon was a great
-way to spend a weekend, and I hope to attend it again next year! Thanks very
-much to all the organizers, volunteers, and sponsors who made it possible.
+visualization, it is the only functionality not implemented by Congress's
+website. Even though it was his first hackathon, Renn did a lot of the heavy
+lifting, writing most of the backend as well as designing our architecture and
+processing a big dataset. Overall, the hackathon was a great way to spend a
+weekend, and I hope to attend it again next year! Thanks very much to all the
+organizers, volunteers, and sponsors who made it possible.
 
 ![a selfie with three students looking up from their laptops](teamphoto.avif "From left to right: Megan, me (Byron), and Renn.")
